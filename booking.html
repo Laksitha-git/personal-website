@@ -193,17 +193,16 @@
         }
 
         // ==========================================================================
-        // UNAVAILABLE DATES - JSONBin.io cloud bin එකෙන් live load වෙනවා
+        // UNAVAILABLE DATES - Netlify Function + Blobs එකෙන් live load වෙනවා (100% ඔයාගේම Netlify account එකේ)
         // දවසක් අසනීප වුනොත් / busy වුනොත්, admin.html page එකෙන් toggle කරාම මෙතන automatically update වෙනවා
         // redeploy කරන්නවත් ඕන නෑ
         // ==========================================================================
-        const JSONBIN_ID = '6a5c26beda38895dfe70eece';
         let blockedDates = [];
 
-        fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_ID}/latest`)
+        fetch('/api/availability')
             .then(res => res.json())
-            .then(data => { blockedDates = (data.record && data.record.blockedDates) || []; })
-            .catch(() => { blockedDates = []; }) // bin එක load නොවුනොත් හැම දවසක්ම available විදිහට තියෙනවා
+            .then(data => { blockedDates = data.blockedDates || []; })
+            .catch(() => { blockedDates = []; }) // load නොවුනොත් හැම දවසක්ම available විදිහට තියෙනවා
             .finally(() => buildDatePicker());
 
         // ඉදිරි 21 දවස (weekdays විතරයි click කරන්න පුළුවන්, Calendly availability එකටම match වෙන්න)

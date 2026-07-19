@@ -113,32 +113,32 @@
 
     <script>
         // ==========================================================================
-        // NOTE: මේ page එක client-side password check එකක් විතරයි - real server-side security නෙමෙයි.
-        // View-source කළොත් password එකම plain-text විදිහට පේනවා. මේක "casual access" deterrent එකක් විතරයි,
-        // determined කෙනෙක්ට bypass කරන්න පුළුවන් - ඒම මේ URL එක (admin.html) කාටවත් share කරන්න එපා.
-        // Password එක වෙනස් කරන්න ඕන නම්, පහළින් තියෙන ADMIN_PASSWORD value එකම වෙනස් කරන්න.
+        // Password එක දැන් SERVER-SIDE එකෙන් check වෙනවා (Netlify Function එකේ) -
+        // view-source කළොත් password එකක්ම පේන්නේ නෑ, code එකේ කිසිම තැනක password එක hardcode වෙලා නෑ.
+        // Netlify dashboard එකේ Environment Variables වල ADMIN_PASSWORD කියලා දාපු value එකට
+        // Save කරාට පස්සේ server එකෙන් verify වෙනවා.
         // ==========================================================================
-        const ADMIN_PASSWORD = 'laksitha2026';
-        const JSONBIN_ID = '6a5c26beda38895dfe70eece';
-        const JSONBIN_MASTER_KEY = '$2a$10$tkRzlr2sspihuqb1B7Nu2OYJbsCGNw2Tc1r.5DeZ.b0Tl8bWz2lLO';
-
         const adminGate = document.getElementById('adminGate');
         const adminPanel = document.getElementById('adminPanel');
         const adminPasswordInput = document.getElementById('adminPassword');
         const adminGateStatus = document.getElementById('adminGateStatus');
+        let enteredPassword = '';
 
         document.getElementById('adminUnlockBtn').addEventListener('click', unlock);
         adminPasswordInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') unlock(); });
 
         function unlock() {
-            if (adminPasswordInput.value === ADMIN_PASSWORD) {
-                adminGate.style.display = 'none';
-                adminPanel.style.display = 'block';
-                loadAvailability();
-            } else {
-                adminGateStatus.textContent = 'Incorrect password.';
+            // Read access එක (GET) හැමෝටම open, ඒම මෙතන අපි password එක temporarily store කරගන්නවා
+            // විතරයි - actual validation එක Save කරන මොහොතේදී server එකෙන් වෙනවා.
+            enteredPassword = adminPasswordInput.value;
+            if (!enteredPassword) {
+                adminGateStatus.textContent = 'Please enter a password.';
                 adminGateStatus.style.color = '#b91c1c';
+                return;
             }
+            adminGate.style.display = 'none';
+            adminPanel.style.display = 'block';
+            loadAvailability();
         }
     </script>
 
@@ -148,7 +148,6 @@
         const adminStatusBanner = document.getElementById('adminStatusBanner');
         const saveStatus = document.getElementById('saveStatus');
         const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        const dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
         let blockedDates = [];
 
@@ -161,9 +160,9 @@
 
         async function loadAvailability() {
             try {
-                const res = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_ID}/latest`);
+                const res = await fetch('/api/availability');
                 const data = await res.json();
-                blockedDates = (data.record && data.record.blockedDates) || [];
+                blockedDates = data.blockedDates || [];
                 adminStatusBanner.innerHTML = '<i class="fa-solid fa-circle-check"></i><span>Loaded current availability.</span>';
                 buildCalendar();
             } catch (err) {
@@ -234,18 +233,18 @@
             saveStatus.textContent = '';
 
             try {
-                const res = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_ID}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Master-Key': JSONBIN_MASTER_KEY
-                    },
-                    body: JSON.stringify({ blockedDates })
+                const res = await fetch('/api/availability', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password: enteredPassword, blockedDates })
                 });
 
                 if (res.ok) {
                     saveStatus.textContent = 'Saved! The booking page will reflect this immediately.';
                     saveStatus.style.color = 'var(--text-primary)';
+                } else if (res.status === 401) {
+                    saveStatus.textContent = 'Incorrect password. Please refresh the page and try again.';
+                    saveStatus.style.color = '#b91c1c';
                 } else {
                     saveStatus.textContent = 'Something went wrong saving. Please try again.';
                     saveStatus.style.color = '#b91c1c';
