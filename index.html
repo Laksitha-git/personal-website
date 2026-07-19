@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!-- TODO: G-XXXXXXXXXX එක ඔයාගේ actual Google Analytics Measurement ID එකෙන් replace කරන්න (analytics.google.com) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-XXXXXXXXXX");
+    </script>
+
+    <script>
+        // Dark mode - saved preference (or OS preference) එක CSS load වෙන්නත් කලින් apply කරනවා, theme flash එකක් වළක්වන්න
+        (function () {
+            try {
+                var saved = localStorage.getItem('theme');
+                var wantsDark = saved ? saved === 'dark' : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                if (wantsDark) document.documentElement.setAttribute('data-theme', 'dark');
+            } catch (e) {}
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Poppins:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>LAKSITHA's Profile</title>
+
+    <meta name="description" content="Laksitha Chamodya - Web Designer. Figma, Adobe Photoshop, Illustrator, UI/UX Design.">
+    <meta name="author" content="Laksitha Chamodya">
+    <meta name="theme-color" content="#1A2C51">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://laksitha-personal-web.netlify.app/">
+    <meta property="og:title" content="LAKSITHA's Profile">
+    <meta property="og:description" content="Web Designer - Figma, Adobe Photoshop, Illustrator, UI/UX Design.">
+    <meta property="og:image" content="https://laksitha-personal-web.netlify.app/Profile-icon.jpg">
+    <!-- og:image now points to the live domain -->
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="LAKSITHA's Profile">
+    <meta name="twitter:description" content="Web Designer - Figma, Adobe Photoshop, Illustrator, UI/UX Design.">
+    <meta name="twitter:image" content="https://laksitha-personal-web.netlify.app/Profile-icon.jpg">
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Main content එකට යන්න</a>
+
+    <div id="preloader">
+        <div class="preloader-grid"></div>
+        <div class="preloader-panels"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="preloader-stage">
+            <div class="preloader-frame" id="preloaderFrame">
+                <span class="wf-bar wf-nav"></span>
+                <span class="wf-bar wf-img"></span>
+                <span class="wf-bar wf-line1"></span>
+                <span class="wf-bar wf-line2"></span>
+                <span class="wf-bar wf-btn"></span>
+            </div>
+            <div class="preloader-word">LAKSITHA</div>
+            <div class="preloader-status" id="preloaderStatus">Sketching layout</div>
+        </div>
+    </div>
+
+    <!-- ========================================================
+          NAV BAR
+         ======================================================== -->
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">LAKSITHA</a>
+
+            <div class="nav-links" id="navLinks">
+                <a href="about.html">About</a>
+                <a href="skills.html">Skills</a>
+                <a href="work.html">Work</a>
+                <a href="contact.html">Contact</a>
+                <a href="contact.html" class="nav-cta">Hire Me</a>
+            </div>
+
+            <button class="theme-toggle" id="themeToggle" aria-label="Dark mode toggle කරන්න">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Menu ඇරගන්න" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ========================================================
+          HERO SECTION
+         ======================================================== -->
+    <section id="main-content" class="hero">
+        <div class="blob-wrap blob-wrap-1" id="blobWrap1"><div class="blob blob-1"></div></div>
+        <div class="blob-wrap blob-wrap-2" id="blobWrap2"><div class="blob blob-2"></div></div>
+
+        <h1 class="head reveal" style="transition-delay: 0.1s;">LAKSITHA</h1>
+        <h2 class="sub-head reveal" style="transition-delay: 0.25s;">"<span id="typedText"></span><span class="typing-cursor">|</span>"</h2>
+
+        <!-- TODO: project schedule busy වුනොත් "Available" එක "Booked until [date]" වගේ update කරන්න -->
+        <div class="availability-badge availability-badge--hero reveal" style="transition-delay: 0.32s; margin-top: 18px;">
+            <span class="availability-dot"></span>
+            Available for new projects
+        </div>
+
+        <div class="profile-container reveal-fade" style="transition-delay: 0.4s;">
+            <img class="profile-img" id="profileBtn" src="Profile-icon.jpg" alt="Laksitha's Profile" title="Laksitha's Profile" style="cursor: pointer;" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Short bio බලන්න" draggable="false">
+        </div>
+
+        <div class="contact-buttons" style="justify-content: flex-start; margin-top: 26px;">
+            <a class="whatsapp" href="https://wa.me/94751271292?text=Hi%20Laksitha,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project!" target="_blank">Whats App</a>
+        </div>
+
+        <!--  TODO: href="#" ටික actual profile URLs වලට වෙනස් කරන්න -->
+        <div class="social-links reveal" style="transition-delay: 0.7s;">
+            <a href="#" class="social-icon" id="githubLink" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="#" class="social-icon" id="linkedinLink" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="social-icon" id="instagramLink" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+
+        <a href="about.html" class="scroll-hint" aria-label="About page එකට යන්න">
+            <i class="fa-solid fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- ========================================================
+         WHAT I DO (Home teaser)
+         ======================================================== -->
+    <section class="section">
+        <div class="section-inner">
+            <span class="section-label reveal-fade">What I Do</span>
+            <h2 class="section-title reveal">Where I can help</h2>
+            <p class="section-sub reveal">A quick look at how I usually work with clients.</p>
+
+            <div class="work-grid">
+                <div class="project-card reveal" style="transition-delay: 0.05s; cursor: default;">
+                    <div class="project-thumb thumb-1"><i class="fa-solid fa-pen-nib"></i></div>
+                    <h3>UI / UX Design</h3>
+                    <p>Interfaces that are clear, easy to use, and pleasant to look at.</p>
+                </div>
+                <div class="project-card reveal" style="transition-delay: 0.15s; cursor: default;">
+                    <div class="project-thumb thumb-2"><i class="fa-solid fa-swatchbook"></i></div>
+                    <h3>Branding</h3>
+                    <p>Logos, color systems, and identity kits that feel consistent everywhere.</p>
+                </div>
+                <div class="project-card reveal" style="transition-delay: 0.25s; cursor: default;">
+                    <div class="project-thumb thumb-3"><i class="fa-solid fa-code"></i></div>
+                    <h3>Front-End Build</h3>
+                    <p>Turning finished designs into clean, working HTML &amp; CSS.</p>
+                </div>
+            </div>
+
+            <a href="about.html" class="section-cta">More about me <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- ========================================================
+         FEATURED WORK (Home preview)
+         ======================================================== -->
+    <section class="section section-alt">
+        <div class="section-inner">
+            <span class="section-label reveal-fade">Featured Work</span>
+            <h2 class="section-title reveal">A few recent projects</h2>
+            <p class="section-sub reveal">Placeholder projects — full case studies on the Work page.</p>
+
+            <div class="work-grid">
+                <div class="project-card reveal" style="transition-delay: 0.05s; cursor: default;">
+                    <div class="project-thumb thumb-1"><i class="fa-solid fa-mug-saucer"></i></div>
+                    <h3>Brand Identity — Coffee Shop</h3>
+                    <p>Branding</p>
+                </div>
+                <div class="project-card reveal" style="transition-delay: 0.15s; cursor: default;">
+                    <div class="project-thumb thumb-2"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                    <h3>Mobile App UI — Fitness Tracker</h3>
+                    <p>UI / UX</p>
+                </div>
+                <div class="project-card reveal" style="transition-delay: 0.25s; cursor: default;">
+                    <div class="project-thumb thumb-3"><i class="fa-solid fa-display"></i></div>
+                    <h3>Landing Page — SaaS Product</h3>
+                    <p>Web Design</p>
+                </div>
+            </div>
+
+            <a href="work.html" class="section-cta">View all projects <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- ========================================================
+         CONTACT CTA (Home)
+         ======================================================== -->
+    <section class="section">
+        <div class="section-inner contact-inner">
+            <span class="section-label reveal-fade">Let's Talk</span>
+            <h2 class="section-title reveal">Got a project in mind?</h2>
+            <p class="section-sub reveal">I'm currently open for freelance work — send a message and let's get started.</p>
+            <a href="contact.html" class="section-cta">Get in touch <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- ========================================================
+          FOOTER
+         ======================================================== -->
+    <footer class="site-footer">
+        <p>&copy; <span id="footerYear"></span> Laksitha Chamodya. Built with HTML &amp; CSS.</p>
+    </footer>
+
+    <!-- ========================================================
+          PROFILE "SHORT IDEA" MODAL
+         ======================================================== -->
+    <div id="infoModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="infoModalTitle">
+        <div class="modal-content">
+            <button class="close-btn" id="closeBtn" aria-label="Modal එක close කරන්න">&times;</button>
+
+            <div class="modal-avatar-wrap">
+                <img class="modal-avatar" src="Profile-icon.jpg" alt="Laksitha's Profile" draggable="false">
+            </div>
+
+            <h2 id="infoModalTitle" class="modal-name">Laksitha Chamodya</h2>
+            <p class="modal-role">Web Designer</p>
+
+            <hr>
+
+            <div class="modal-info-list">
+                <div class="modal-info-row">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <div>
+                        <span class="modal-info-label">Experience</span>
+                        <span class="modal-info-value">Web Designer (1+ Years)</span>
+                    </div>
+                </div>
+                <div class="modal-info-row">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <div>
+                        <span class="modal-info-label">Qualification</span>
+                        <span class="modal-info-value">Diploma in Software Engineering / Web Design</span>
+                    </div>
+                </div>
+                <div class="modal-info-row">
+                    <i class="fa-solid fa-code"></i>
+                    <div>
+                        <span class="modal-info-label">Skills</span>
+                        <span class="modal-info-value">HTML, CSS, JavaScript, UI/UX Design</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-tags">
+                <span class="modal-tag">Creative</span>
+                <span class="modal-tag">Detail-Oriented</span>
+                <span class="modal-tag">Fast Learner</span>
+            </div>
+
+            <a href="about.html" class="more-details-btn">More details <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </div>
+
+    <script>
+        // Mouse-move parallax on hero blobs (reduced-motion users ට skip කරනවා)
+        (function () {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReducedMotion) return;
+
+            const heroEl = document.querySelector('.hero');
+            const wrap1 = document.getElementById('blobWrap1');
+            const wrap2 = document.getElementById('blobWrap2');
+            if (!heroEl || !wrap1 || !wrap2) return;
+
+            heroEl.addEventListener('mousemove', (e) => {
+                const rect = heroEl.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                wrap1.style.transform = `translate(${x * 30}px, ${y * 30}px)`;
+                wrap2.style.transform = `translate(${x * -25}px, ${y * -25}px)`;
+            });
+
+            heroEl.addEventListener('mouseleave', () => {
+                wrap1.style.transform = 'translate(0, 0)';
+                wrap2.style.transform = 'translate(0, 0)';
+            });
+        })();
+    </script>
+
+    <script>
+        // Scroll Reveal
+        const revealEls = document.querySelectorAll('.reveal, .reveal-fade');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        revealEls.forEach(el => revealObserver.observe(el));
+    </script>
+
+    <script>
+        // ⌨ Subtitle එකට Typing Animation එක
+        const typedTextEl = document.getElementById('typedText');
+        const phrases = ["Web Designer", "UI/UX Enthusiast", "Frontend Developer"];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentPhrase = phrases[phraseIndex];
+            if (isDeleting) {
+                charIndex--;
+                typedTextEl.textContent = currentPhrase.substring(0, charIndex);
+            } else {
+                charIndex++;
+                typedTextEl.textContent = currentPhrase.substring(0, charIndex);
+            }
+            let typeSpeed = isDeleting ? 40 : 80;
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 400;
+            }
+            setTimeout(typeEffect, typeSpeed);
+        }
+        typeEffect();
+    </script>
+
+    <script>
+        //  Profile "Short Idea" Modal
+        const profileBtn = document.getElementById('profileBtn');
+        const infoModal = document.getElementById('infoModal');
+        const closeBtn = document.getElementById('closeBtn');
+
+        function openInfoModal() {
+            infoModal.style.display = 'flex';
+            closeBtn.focus();
+        }
+        function closeInfoModal() {
+            infoModal.style.display = 'none';
+            profileBtn.focus();
+        }
+
+        profileBtn.addEventListener('click', openInfoModal);
+        profileBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openInfoModal();
+            }
+        });
+        closeBtn.addEventListener('click', closeInfoModal);
+        window.addEventListener('click', (e) => { if (e.target === infoModal) closeInfoModal(); });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && infoModal.style.display === 'flex') closeInfoModal();
+        });
+    </script>
+
+    <script>
+        //  Mobile Nav Toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', isOpen);
+        });
+    </script>
+
+    <script>
+        // Dark mode toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        function updateThemeIcon() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            themeToggle.setAttribute('aria-label', isDark ? 'Light mode වෙනස් කරන්න' : 'Dark mode වෙනස් කරන්න');
+        }
+        updateThemeIcon();
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            updateThemeIcon();
+        });
+    </script>
+
+    <script>
+        document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+        // Content protection - right-click context menu (save image / inspect shortcut) අඩුවෙන් convenient කරනවා
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Common keyboard shortcuts for saving/viewing-source/devtools - deterrent විතරයි, modern Chrome/Firefox ඇතුළේ F12/DevTools මේකෙන් සම්පූර්ණයෙන් නවත්තන්න බෑ
+        document.addEventListener('keydown', (e) => {
+            const key = e.key.toLowerCase();
+            const blockedCombo =
+                (e.ctrlKey && key === 's') ||
+                (e.ctrlKey && key === 'u') ||
+                (e.ctrlKey && e.shiftKey && (key === 'i' || key === 'j' || key === 'c')) ||
+                key === 'f12';
+            if (blockedCombo) e.preventDefault();
+        });
+
+        // Copy කරන්න try කළොත් clipboard එකට attribution message එකක් දානවා
+        document.addEventListener('copy', (e) => {
+            e.preventDefault();
+            e.clipboardData.setData('text/plain', "Content from LAKSITHA's Profile - please contact via the site's Contact page.");
+        });
+
+        document.onselectstart = () => false;
+    </script>
+
+    <script>
+        // Preloader - designer-flavored status messages, cycling while the wireframe builds
+        (function () {
+            const statusEl = document.getElementById("preloaderStatus");
+            const messages = ["Sketching layout", "Choosing palette", "Aligning pixels", "Polishing details"];
+            let i = 0;
+            const interval = setInterval(() => {
+                i = (i + 1) % messages.length;
+                statusEl.classList.add("swap");
+                setTimeout(() => {
+                    statusEl.textContent = messages[i];
+                    statusEl.classList.remove("swap");
+                }, 250);
+            }, 480);
+            window.__preloaderInterval = interval;
+        })();
+
+        // Preloader exit - venetian-blind panels lift away in a staggered wave
+        window.addEventListener("load", () => {
+            const preloader = document.getElementById("preloader");
+            setTimeout(() => {
+                preloader.classList.add("loaded");
+                clearInterval(window.__preloaderInterval);
+                setTimeout(() => preloader.remove(), 1200);
+            }, 1700);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('theme');
+                var wantsDark = saved ? saved === 'dark' : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                if (wantsDark) document.documentElement.setAttribute('data-theme', 'dark');
+            } catch (e) {}
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <title>Page Not Found — LAKSITHA</title>
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#1A2C51">
+
+    <!-- TODO: G-XXXXXXXXXX එක ඔයාගේ actual Google Analytics Measurement ID එකෙන් replace කරන්න -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">LAKSITHA</a>
+            <div class="nav-links" id="navLinks">
+                <a href="about.html">About</a>
+                <a href="skills.html">Skills</a>
+                <a href="work.html">Work</a>
+                <a href="contact.html">Contact</a>
+                <a href="contact.html" class="nav-cta">Hire Me</a>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Dark mode toggle කරන්න">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu ඇරගන්න" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="page-header" id="main-content" style="min-height: 80vh;">
+        <span class="page-header-label">Error 404</span>
+        <h1 style="font-size: clamp(56px, 12vw, 110px); margin-bottom: 6px;">404</h1>
+        <p style="max-width: 460px;">This page wandered off somewhere. The link might be broken, or the page may have moved.</p>
+        <a href="index.html" class="section-cta" style="background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.4); color: #ffffff; margin-top: 30px;">
+            <i class="fa-solid fa-house"></i> Back to Home
+        </a>
+    </header>
+
+    <footer class="site-footer">
+        <p>&copy; <span id="footerYear"></span> Laksitha Chamodya. Built with HTML &amp; CSS.</p>
+    </footer>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', isOpen);
+        });
+    </script>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        function updateThemeIcon() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+        }
+        updateThemeIcon();
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('theme', 'light'); }
+            else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('theme', 'dark'); }
+            updateThemeIcon();
+        });
+        document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+        document.addEventListener('keydown', (e) => {
+            const key = e.key.toLowerCase();
+            const blockedCombo =
+                (e.ctrlKey && key === 's') ||
+                (e.ctrlKey && key === 'u') ||
+                (e.ctrlKey && e.shiftKey && (key === 'i' || key === 'j' || key === 'c')) ||
+                key === 'f12';
+            if (blockedCombo) e.preventDefault();
+        });
+        document.onselectstart = () => false;
+    </script>
+</body>
+</html>

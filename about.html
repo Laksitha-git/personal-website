@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!-- TODO: G-XXXXXXXXXX එක ඔයාගේ actual Google Analytics Measurement ID එකෙන් replace කරන්න (analytics.google.com) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-XXXXXXXXXX");
+    </script>
+
+    <script>
+        // Dark mode - saved preference (or OS preference) එක CSS load වෙන්නත් කලින් apply කරනවා, theme flash එකක් වළක්වන්න
+        (function () {
+            try {
+                var saved = localStorage.getItem('theme');
+                var wantsDark = saved ? saved === 'dark' : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                if (wantsDark) document.documentElement.setAttribute('data-theme', 'dark');
+            } catch (e) {}
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <title>About — LAKSITHA</title>
+    <meta name="description" content="About Laksitha Chamodya - Web Designer.">
+    <meta name="theme-color" content="#1A2C51">
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Main content එකට යන්න</a>
+
+    <div id="preloader">
+        <div class="preloader-grid"></div>
+        <div class="preloader-panels"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="preloader-stage">
+            <div class="preloader-frame" id="preloaderFrame">
+                <span class="wf-bar wf-nav"></span>
+                <span class="wf-bar wf-img"></span>
+                <span class="wf-bar wf-line1"></span>
+                <span class="wf-bar wf-line2"></span>
+                <span class="wf-bar wf-btn"></span>
+            </div>
+            <div class="preloader-word">LAKSITHA</div>
+            <div class="preloader-status" id="preloaderStatus">Sketching layout</div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">LAKSITHA</a>
+            <div class="nav-links" id="navLinks">
+                <a href="about.html" class="active">About</a>
+                <a href="skills.html">Skills</a>
+                <a href="work.html">Work</a>
+                <a href="contact.html">Contact</a>
+                <a href="contact.html" class="nav-cta">Hire Me</a>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Dark mode toggle කරන්න">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Menu ඇරගන්න" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="page-header" id="main-content">
+        <span class="page-header-label">About</span>
+        <h1>Who I am</h1>
+        <p>Web designer turning simple ideas into clean, usable interfaces.</p>
+    </header>
+
+    <section class="section">
+        <div class="section-inner">
+            <!--  TODO: ඔයාගේම කතාව මෙතනට - experience, design approach, personal touch -->
+            <p class="about-text reveal">
+                I'm a web designer who enjoys turning simple ideas into clean, usable interfaces.
+                My focus is on layouts that feel calm and intentional — clear hierarchy, thoughtful
+                spacing, and details that make a page easy to trust. I'm currently building out my
+                portfolio while learning by shipping real projects, one page at a time.
+            </p>
+            <p class="about-text reveal" style="transition-delay: 0.1s; margin-top: 20px;">
+                Outside of design, I like exploring new tools, refining small UI details until they
+                feel just right, and learning by rebuilding things I admire.
+            </p>
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <div class="section-inner">
+            <span class="section-label reveal-fade">How I work</span>
+            <h2 class="section-title reveal">My approach</h2>
+
+            <!--  TODO: ඔයාගේ actual process එකට ගැලපෙන්න edit කරන්න -->
+            <div class="work-grid">
+                <div class="project-card reveal" style="transition-delay: 0.05s; cursor: default;">
+                    <div class="project-thumb thumb-1"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <h3>Discover</h3>
+                    <p>Understand the goal, the audience, and what success looks like.</p>
+                </div>
+                <div class="project-card reveal" style="transition-delay: 0.15s; cursor: default;">
+                    <div class="project-thumb thumb-2"><i class="fa-solid fa-pen-ruler"></i></div>
+                    <h3>Design</h3>
+                    <p>Wireframe, explore layouts, and refine until it feels right.</p>
+                </div>
+                <div class="project-card reveal" style="transition-delay: 0.25s; cursor: default;">
+                    <div class="project-thumb thumb-3"><i class="fa-solid fa-rocket"></i></div>
+                    <h3>Deliver</h3>
+                    <p>Hand off clean, well-organized files ready to build.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-inner">
+            <span class="section-label reveal-fade">Fast Facts</span>
+            <h2 class="section-title reveal">A quick snapshot</h2>
+
+            <!-- TODO: ඔයාගේ actual numbers දාන්න -->
+            <div class="stats-grid">
+                <div class="stat-item reveal" style="transition-delay: 0.05s;">
+                    <span class="stat-number">12+</span>
+                    <span class="stat-label">Projects Completed</span>
+                </div>
+                <div class="stat-item reveal" style="transition-delay: 0.1s;">
+                    <span class="stat-number">1+</span>
+                    <span class="stat-label">Years of Experience</span>
+                </div>
+                <div class="stat-item reveal" style="transition-delay: 0.15s;">
+                    <span class="stat-number">8+</span>
+                    <span class="stat-label">Happy Clients</span>
+                </div>
+                <div class="stat-item reveal" style="transition-delay: 0.2s;">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Design Tools Mastered</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <div class="section-inner">
+            <span class="section-label reveal-fade">Journey</span>
+            <h2 class="section-title reveal">Experience &amp; education</h2>
+
+            <!-- TODO: ඔයාගේ actual timeline එකට වෙනස් කරන්න -->
+            <div class="timeline">
+                <div class="timeline-item reveal" style="transition-delay: 0.05s;">
+                    <div class="timeline-date">2024 — Present</div>
+                    <h3 class="timeline-title">Freelance Web Designer</h3>
+                    <p class="timeline-desc">Designing and building small business websites, landing pages, and brand kits for local clients.</p>
+                </div>
+                <div class="timeline-item reveal" style="transition-delay: 0.15s;">
+                    <div class="timeline-date">2023</div>
+                    <h3 class="timeline-title">Diploma in Software Engineering / Web Design</h3>
+                    <p class="timeline-desc">Completed a diploma covering front-end development, UI/UX fundamentals, and design tools.</p>
+                </div>
+                <div class="timeline-item reveal" style="transition-delay: 0.25s;">
+                    <div class="timeline-date">2022</div>
+                    <h3 class="timeline-title">Started learning design</h3>
+                    <p class="timeline-desc">Picked up Figma and Photoshop, and started redesigning small projects for practice.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <p>&copy; <span id="footerYear"></span> Laksitha Chamodya. Built with HTML &amp; CSS.</p>
+    </footer>
+
+    <script>
+        const revealEls = document.querySelectorAll('.reveal, .reveal-fade');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        revealEls.forEach(el => revealObserver.observe(el));
+    </script>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', isOpen);
+        });
+    </script>
+
+    <script>
+        // Dark mode toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        function updateThemeIcon() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            themeToggle.setAttribute('aria-label', isDark ? 'Light mode වෙනස් කරන්න' : 'Dark mode වෙනස් කරන්න');
+        }
+        updateThemeIcon();
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            updateThemeIcon();
+        });
+    </script>
+
+    <script>
+        document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+        // Content protection - right-click context menu (save image / inspect shortcut) අඩුවෙන් convenient කරනවා
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Common keyboard shortcuts for saving/viewing-source/devtools - deterrent විතරයි, modern Chrome/Firefox ඇතුළේ F12/DevTools මේකෙන් සම්පූර්ණයෙන් නවත්තන්න බෑ
+        document.addEventListener('keydown', (e) => {
+            const key = e.key.toLowerCase();
+            const blockedCombo =
+                (e.ctrlKey && key === 's') ||
+                (e.ctrlKey && key === 'u') ||
+                (e.ctrlKey && e.shiftKey && (key === 'i' || key === 'j' || key === 'c')) ||
+                key === 'f12';
+            if (blockedCombo) e.preventDefault();
+        });
+
+        // Copy කරන්න try කළොත් clipboard එකට attribution message එකක් දානවා
+        document.addEventListener('copy', (e) => {
+            e.preventDefault();
+            e.clipboardData.setData('text/plain', "Content from LAKSITHA's Profile - please contact via the site's Contact page.");
+        });
+
+        document.onselectstart = () => false;
+    </script>
+
+    <script>
+        // Preloader - designer-flavored status messages, cycling while the wireframe builds
+        (function () {
+            const statusEl = document.getElementById("preloaderStatus");
+            const messages = ["Sketching layout", "Choosing palette", "Aligning pixels", "Polishing details"];
+            let i = 0;
+            const interval = setInterval(() => {
+                i = (i + 1) % messages.length;
+                statusEl.classList.add("swap");
+                setTimeout(() => {
+                    statusEl.textContent = messages[i];
+                    statusEl.classList.remove("swap");
+                }, 250);
+            }, 480);
+            window.__preloaderInterval = interval;
+        })();
+
+        // Preloader exit - venetian-blind panels lift away in a staggered wave
+        window.addEventListener("load", () => {
+            const preloader = document.getElementById("preloader");
+            setTimeout(() => {
+                preloader.classList.add("loaded");
+                clearInterval(window.__preloaderInterval);
+                setTimeout(() => preloader.remove(), 1200);
+            }, 1700);
+        });
+    </script>
+</body>
+</html>

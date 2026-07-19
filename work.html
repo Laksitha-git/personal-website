@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!-- TODO: G-XXXXXXXXXX එක ඔයාගේ actual Google Analytics Measurement ID එකෙන් replace කරන්න (analytics.google.com) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-XXXXXXXXXX");
+    </script>
+
+    <script>
+        // Dark mode - saved preference (or OS preference) එක CSS load වෙන්නත් කලින් apply කරනවා, theme flash එකක් වළක්වන්න
+        (function () {
+            try {
+                var saved = localStorage.getItem('theme');
+                var wantsDark = saved ? saved === 'dark' : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                if (wantsDark) document.documentElement.setAttribute('data-theme', 'dark');
+            } catch (e) {}
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <title>Work — LAKSITHA</title>
+    <meta name="description" content="Selected work - Laksitha Chamodya, Web Designer.">
+    <meta name="theme-color" content="#1A2C51">
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Main content එකට යන්න</a>
+
+    <div id="preloader">
+        <div class="preloader-grid"></div>
+        <div class="preloader-panels"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="preloader-stage">
+            <div class="preloader-frame" id="preloaderFrame">
+                <span class="wf-bar wf-nav"></span>
+                <span class="wf-bar wf-img"></span>
+                <span class="wf-bar wf-line1"></span>
+                <span class="wf-bar wf-line2"></span>
+                <span class="wf-bar wf-btn"></span>
+            </div>
+            <div class="preloader-word">LAKSITHA</div>
+            <div class="preloader-status" id="preloaderStatus">Sketching layout</div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">LAKSITHA</a>
+            <div class="nav-links" id="navLinks">
+                <a href="about.html">About</a>
+                <a href="skills.html">Skills</a>
+                <a href="work.html" class="active">Work</a>
+                <a href="contact.html">Contact</a>
+                <a href="contact.html" class="nav-cta">Hire Me</a>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Dark mode toggle කරන්න">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Menu ඇරගන්න" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="page-header" id="main-content">
+        <span class="page-header-label">Work</span>
+        <h1>Selected projects</h1>
+        <p>A few placeholder projects — click any card for details, or filter by category.</p>
+    </header>
+
+    <!--  TODO: real project thumbnails, titles, tags, descriptions ටික දාන්න -->
+    <section class="section">
+        <div class="section-inner">
+
+            <div class="work-filters">
+                <button class="work-filter-btn active" data-filter="all">All</button>
+                <button class="work-filter-btn" data-filter="Branding">Branding</button>
+                <button class="work-filter-btn" data-filter="UI / UX">UI / UX</button>
+                <button class="work-filter-btn" data-filter="Web Design">Web Design</button>
+            </div>
+
+            <div class="work-grid">
+                <div class="project-card reveal" style="transition-delay: 0.05s;" tabindex="0" role="button" data-category="Branding"
+                     data-title="Brand Identity — Coffee Shop" data-tag="Branding"
+                     data-desc="Logo, packaging and social media kit design for a local coffee shop concept. Placeholder project — replace with your real work.">
+                    <div class="project-thumb thumb-1"><i class="fa-solid fa-mug-saucer"></i></div>
+                    <h3>Brand Identity — Coffee Shop</h3>
+                    <p>Branding</p>
+                </div>
+
+                <div class="project-card reveal" style="transition-delay: 0.1s;" tabindex="0" role="button" data-category="UI / UX"
+                     data-title="Mobile App UI — Fitness Tracker" data-tag="UI / UX"
+                     data-desc="A clean, motivating UI for a fitness tracking app - onboarding, dashboard and workout screens. Placeholder project — replace with your real work.">
+                    <div class="project-thumb thumb-2"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                    <h3>Mobile App UI — Fitness Tracker</h3>
+                    <p>UI / UX</p>
+                </div>
+
+                <div class="project-card reveal" style="transition-delay: 0.15s;" tabindex="0" role="button" data-category="Web Design"
+                     data-title="Landing Page — SaaS Product" data-tag="Web Design"
+                     data-desc="A conversion-focused landing page design for a SaaS product launch. Placeholder project — replace with your real work.">
+                    <div class="project-thumb thumb-3"><i class="fa-solid fa-display"></i></div>
+                    <h3>Landing Page — SaaS Product</h3>
+                    <p>Web Design</p>
+                </div>
+
+                <div class="project-card reveal" style="transition-delay: 0.2s;" tabindex="0" role="button" data-category="Branding"
+                     data-title="Packaging — Skincare Line" data-tag="Branding"
+                     data-desc="Minimal packaging and label system for a small skincare brand. Placeholder project — replace with your real work.">
+                    <div class="project-thumb thumb-1"><i class="fa-solid fa-box-open"></i></div>
+                    <h3>Packaging — Skincare Line</h3>
+                    <p>Branding</p>
+                </div>
+
+                <div class="project-card reveal" style="transition-delay: 0.25s;" tabindex="0" role="button" data-category="UI / UX"
+                     data-title="Dashboard UI — Analytics Tool" data-tag="UI / UX"
+                     data-desc="Data-dense dashboard redesigned for clarity - charts, filters and quick actions. Placeholder project — replace with your real work.">
+                    <div class="project-thumb thumb-2"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3>Dashboard UI — Analytics Tool</h3>
+                    <p>UI / UX</p>
+                </div>
+
+                <div class="project-card reveal" style="transition-delay: 0.3s;" tabindex="0" role="button" data-category="Web Design"
+                     data-title="Portfolio Site — Photographer" data-tag="Web Design"
+                     data-desc="A quiet, image-first portfolio site built to let the photography lead. Placeholder project — replace with your real work.">
+                    <div class="project-thumb thumb-3"><i class="fa-solid fa-camera"></i></div>
+                    <h3>Portfolio Site — Photographer</h3>
+                    <p>Web Design</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <div class="section-inner">
+            <span class="section-label reveal-fade">Testimonials</span>
+            <h2 class="section-title reveal">What clients say</h2>
+            <p class="section-sub reveal">Placeholder quotes — swap these for real client feedback.</p>
+
+            <!-- TODO: real testimonials වලින් replace කරන්න -->
+            <div class="testimonial-grid">
+                <div class="testimonial-card reveal" style="transition-delay: 0.05s;">
+                    <p class="testimonial-quote">"Laksitha turned a vague idea into a clean, working design faster than I expected. Great communication throughout."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">N</div>
+                        <div>
+                            <div class="testimonial-name">Nimal Perera</div>
+                            <div class="testimonial-role">Small Business Owner</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal" style="transition-delay: 0.15s;">
+                    <p class="testimonial-quote">"Really thoughtful about the small details - spacing, colors, and how everything felt on mobile."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">S</div>
+                        <div>
+                            <div class="testimonial-name">Shanika Silva</div>
+                            <div class="testimonial-role">Startup Founder</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal" style="transition-delay: 0.25s;">
+                    <p class="testimonial-quote">"Delivered exactly what we discussed, on time, with a couple of thoughtful suggestions we hadn't considered."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">R</div>
+                        <div>
+                            <div class="testimonial-name">Ruwan Fernando</div>
+                            <div class="testimonial-role">Marketing Lead</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <p>&copy; <span id="footerYear"></span> Laksitha Chamodya. Built with HTML &amp; CSS.</p>
+    </footer>
+
+    <!--  PROJECT DETAILS MODAL -->
+    <div id="projectModal" class="project-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+        <div class="project-modal-content">
+            <button class="close-btn" id="projectCloseBtn" aria-label="Modal එක close කරන්න">&times;</button>
+            <div class="project-modal-thumb" id="projectModalThumb"></div>
+            <span class="project-modal-tag" id="projectModalTag"></span>
+            <h3 id="projectModalTitle"></h3>
+            <p id="projectModalDesc"></p>
+        </div>
+    </div>
+
+    <script>
+        const revealEls = document.querySelectorAll('.reveal, .reveal-fade');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        revealEls.forEach(el => revealObserver.observe(el));
+    </script>
+
+    <script>
+        //  Work Filter
+        const filterBtns = document.querySelectorAll('.work-filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        //  Project Details Modal
+        const projectModal = document.getElementById('projectModal');
+        const projectCloseBtn = document.getElementById('projectCloseBtn');
+        const projectModalTitle = document.getElementById('projectModalTitle');
+        const projectModalDesc = document.getElementById('projectModalDesc');
+        const projectModalTag = document.getElementById('projectModalTag');
+        const projectModalThumb = document.getElementById('projectModalThumb');
+        let lastFocusedCard = null;
+
+        function openProjectModal(card) {
+            projectModalTitle.textContent = card.dataset.title;
+            projectModalDesc.textContent = card.dataset.desc;
+            projectModalTag.textContent = card.dataset.tag;
+
+            const thumb = card.querySelector('.project-thumb');
+            projectModalThumb.className = 'project-modal-thumb ' + [...thumb.classList].find(c => c.startsWith('thumb-'));
+            projectModalThumb.innerHTML = thumb.querySelector('i').outerHTML;
+
+            lastFocusedCard = card;
+            projectModal.style.display = 'flex';
+            projectCloseBtn.focus();
+        }
+
+        function closeProjectModal() {
+            projectModal.style.display = 'none';
+            if (lastFocusedCard) lastFocusedCard.focus();
+        }
+
+        projectCards.forEach(card => {
+            card.addEventListener('click', () => openProjectModal(card));
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openProjectModal(card);
+                }
+            });
+        });
+
+        projectCloseBtn.addEventListener('click', closeProjectModal);
+        window.addEventListener('click', (e) => { if (e.target === projectModal) closeProjectModal(); });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && projectModal.style.display === 'flex') closeProjectModal();
+        });
+    </script>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', isOpen);
+        });
+    </script>
+
+    <script>
+        // Dark mode toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        function updateThemeIcon() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            themeToggle.setAttribute('aria-label', isDark ? 'Light mode වෙනස් කරන්න' : 'Dark mode වෙනස් කරන්න');
+        }
+        updateThemeIcon();
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            updateThemeIcon();
+        });
+    </script>
+
+    <script>
+        document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+        // Content protection - right-click context menu (save image / inspect shortcut) අඩුවෙන් convenient කරනවා
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Common keyboard shortcuts for saving/viewing-source/devtools - deterrent විතරයි, modern Chrome/Firefox ඇතුළේ F12/DevTools මේකෙන් සම්පූර්ණයෙන් නවත්තන්න බෑ
+        document.addEventListener('keydown', (e) => {
+            const key = e.key.toLowerCase();
+            const blockedCombo =
+                (e.ctrlKey && key === 's') ||
+                (e.ctrlKey && key === 'u') ||
+                (e.ctrlKey && e.shiftKey && (key === 'i' || key === 'j' || key === 'c')) ||
+                key === 'f12';
+            if (blockedCombo) e.preventDefault();
+        });
+
+        // Copy කරන්න try කළොත් clipboard එකට attribution message එකක් දානවා
+        document.addEventListener('copy', (e) => {
+            e.preventDefault();
+            e.clipboardData.setData('text/plain', "Content from LAKSITHA's Profile - please contact via the site's Contact page.");
+        });
+
+        document.onselectstart = () => false;
+    </script>
+
+    <script>
+        // Preloader - designer-flavored status messages, cycling while the wireframe builds
+        (function () {
+            const statusEl = document.getElementById("preloaderStatus");
+            const messages = ["Sketching layout", "Choosing palette", "Aligning pixels", "Polishing details"];
+            let i = 0;
+            const interval = setInterval(() => {
+                i = (i + 1) % messages.length;
+                statusEl.classList.add("swap");
+                setTimeout(() => {
+                    statusEl.textContent = messages[i];
+                    statusEl.classList.remove("swap");
+                }, 250);
+            }, 480);
+            window.__preloaderInterval = interval;
+        })();
+
+        // Preloader exit - venetian-blind panels lift away in a staggered wave
+        window.addEventListener("load", () => {
+            const preloader = document.getElementById("preloader");
+            setTimeout(() => {
+                preloader.classList.add("loaded");
+                clearInterval(window.__preloaderInterval);
+                setTimeout(() => preloader.remove(), 1200);
+            }, 1700);
+        });
+    </script>
+</body>
+</html>

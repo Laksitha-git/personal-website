@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('theme');
+                var wantsDark = saved ? saved === 'dark' : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                if (wantsDark) document.documentElement.setAttribute('data-theme', 'dark');
+            } catch (e) {}
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <title>Availability Admin — LAKSITHA</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#1A2C51">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">LAKSITHA</a>
+            <div class="nav-links" id="navLinks">
+                <a href="about.html">About</a>
+                <a href="skills.html">Skills</a>
+                <a href="work.html">Work</a>
+                <a href="contact.html">Contact</a>
+                <a href="contact.html" class="nav-cta">Hire Me</a>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Dark mode toggle කරන්න">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu ඇරගන්න" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="page-header" id="main-content">
+        <span class="page-header-label">Private</span>
+        <h1>Availability Admin</h1>
+        <p>Toggle unavailable days here - the booking page updates instantly, no redeploy needed.</p>
+    </header>
+
+    <section class="section">
+        <div class="section-inner" style="max-width: 900px;">
+
+            <!-- Password gate - client-side deterrent විතරයි, real security නෙමෙයි -->
+            <div class="admin-gate" id="adminGate">
+                <h3 class="booking-step-title" style="text-align:center;">Enter password</h3>
+                <input type="password" id="adminPassword" placeholder="Password">
+                <button type="button" class="contact-submit-btn" id="adminUnlockBtn" style="width:100%; justify-content:center;">Unlock</button>
+                <p class="contact-form-note" id="adminGateStatus"></p>
+            </div>
+
+            <div id="adminPanel" style="display:none;">
+                <div class="booking-summary" id="adminStatusBanner">
+                    <i class="fa-solid fa-circle-notch fa-spin"></i>
+                    <span>Loading current availability...</span>
+                </div>
+
+                <div id="calendarContainer"></div>
+
+                <div class="admin-legend">
+                    <span><span class="admin-legend-swatch" style="background: var(--card-bg); border: 1px solid var(--card-border);"></span>Available</span>
+                    <span><span class="admin-legend-swatch" style="background: linear-gradient(135deg, #ef4444, #f97316);"></span>Unavailable</span>
+                    <span><span class="admin-legend-swatch" style="background: var(--card-bg); opacity:0.3;"></span>Weekend / Past</span>
+                </div>
+
+                <button type="button" class="contact-submit-btn" id="saveAvailabilityBtn" style="margin-top: 30px;">Save Changes</button>
+                <p class="contact-form-note" id="saveStatus"></p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <p>&copy; <span id="footerYear"></span> Laksitha Chamodya. Private admin page.</p>
+    </footer>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', isOpen);
+        });
+    </script>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        function updateThemeIcon() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+        }
+        updateThemeIcon();
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('theme', 'light'); }
+            else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('theme', 'dark'); }
+            updateThemeIcon();
+        });
+        document.getElementById('footerYear').textContent = new Date().getFullYear();
+    </script>
+
+    <script>
+        // ==========================================================================
+        // NOTE: මේ page එක client-side password check එකක් විතරයි - real server-side security නෙමෙයි.
+        // View-source කළොත් password එකම plain-text විදිහට පේනවා. මේක "casual access" deterrent එකක් විතරයි,
+        // determined කෙනෙක්ට bypass කරන්න පුළුවන් - ඒම මේ URL එක (admin.html) කාටවත් share කරන්න එපා.
+        // Password එක වෙනස් කරන්න ඕන නම්, පහළින් තියෙන ADMIN_PASSWORD value එකම වෙනස් කරන්න.
+        // ==========================================================================
+        const ADMIN_PASSWORD = 'laksitha2026';
+        const JSONBIN_ID = '6a5c26beda38895dfe70eece';
+        const JSONBIN_MASTER_KEY = '$2a$10$tkRzlr2sspihuqb1B7Nu2OYJbsCGNw2Tc1r.5DeZ.b0Tl8bWz2lLO';
+
+        const adminGate = document.getElementById('adminGate');
+        const adminPanel = document.getElementById('adminPanel');
+        const adminPasswordInput = document.getElementById('adminPassword');
+        const adminGateStatus = document.getElementById('adminGateStatus');
+
+        document.getElementById('adminUnlockBtn').addEventListener('click', unlock);
+        adminPasswordInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') unlock(); });
+
+        function unlock() {
+            if (adminPasswordInput.value === ADMIN_PASSWORD) {
+                adminGate.style.display = 'none';
+                adminPanel.style.display = 'block';
+                loadAvailability();
+            } else {
+                adminGateStatus.textContent = 'Incorrect password.';
+                adminGateStatus.style.color = '#b91c1c';
+            }
+        }
+    </script>
+
+    <script>
+        // Calendar build + load/save logic
+        const calendarContainer = document.getElementById('calendarContainer');
+        const adminStatusBanner = document.getElementById('adminStatusBanner');
+        const saveStatus = document.getElementById('saveStatus');
+        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        const dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+        let blockedDates = [];
+
+        function toLocalIsoDate(d) {
+            const y = d.getFullYear();
+            const m = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${y}-${m}-${day}`;
+        }
+
+        async function loadAvailability() {
+            try {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_ID}/latest`);
+                const data = await res.json();
+                blockedDates = (data.record && data.record.blockedDates) || [];
+                adminStatusBanner.innerHTML = '<i class="fa-solid fa-circle-check"></i><span>Loaded current availability.</span>';
+                buildCalendar();
+            } catch (err) {
+                adminStatusBanner.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i><span>Could not load availability. Check your internet connection.</span>';
+            }
+        }
+
+        function buildCalendar() {
+            calendarContainer.innerHTML = '';
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            // ඉදිරි මාස 2ක් පේන්නවා
+            for (let m = 0; m < 2; m++) {
+                const monthDate = new Date(today.getFullYear(), today.getMonth() + m, 1);
+                const title = document.createElement('h3');
+                title.className = 'admin-month-title';
+                title.textContent = `${monthNames[monthDate.getMonth()]} ${monthDate.getFullYear()}`;
+                calendarContainer.appendChild(title);
+
+                const grid = document.createElement('div');
+                grid.className = 'admin-calendar-grid';
+
+                const daysInMonth = new Date(monthDate.getFullYear(), monthDate.getMonth() + 1, 0).getDate();
+                const firstDayOffset = new Date(monthDate.getFullYear(), monthDate.getMonth(), 1).getDay();
+
+                for (let i = 0; i < firstDayOffset; i++) {
+                    grid.appendChild(document.createElement('div'));
+                }
+
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const d = new Date(monthDate.getFullYear(), monthDate.getMonth(), day);
+                    const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+                    const isPast = d < today;
+                    const isoDate = toLocalIsoDate(d);
+                    const isBlocked = blockedDates.includes(isoDate);
+
+                    const cell = document.createElement('div');
+                    cell.className = 'admin-day-cell';
+                    if (isWeekend) cell.classList.add('weekend');
+                    if (isPast) cell.classList.add('past');
+                    if (isBlocked) cell.classList.add('blocked');
+                    cell.textContent = day;
+                    cell.title = isoDate;
+
+                    if (!isWeekend && !isPast) {
+                        cell.addEventListener('click', () => {
+                            cell.classList.toggle('blocked');
+                            if (cell.classList.contains('blocked')) {
+                                if (!blockedDates.includes(isoDate)) blockedDates.push(isoDate);
+                            } else {
+                                blockedDates = blockedDates.filter(dt => dt !== isoDate);
+                            }
+                        });
+                    }
+
+                    grid.appendChild(cell);
+                }
+
+                calendarContainer.appendChild(grid);
+            }
+        }
+
+        document.getElementById('saveAvailabilityBtn').addEventListener('click', async () => {
+            const btn = document.getElementById('saveAvailabilityBtn');
+            btn.disabled = true;
+            btn.textContent = 'Saving...';
+            saveStatus.textContent = '';
+
+            try {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_ID}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': JSONBIN_MASTER_KEY
+                    },
+                    body: JSON.stringify({ blockedDates })
+                });
+
+                if (res.ok) {
+                    saveStatus.textContent = 'Saved! The booking page will reflect this immediately.';
+                    saveStatus.style.color = 'var(--text-primary)';
+                } else {
+                    saveStatus.textContent = 'Something went wrong saving. Please try again.';
+                    saveStatus.style.color = '#b91c1c';
+                }
+            } catch (err) {
+                saveStatus.textContent = 'Network error. Please try again.';
+                saveStatus.style.color = '#b91c1c';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Save Changes';
+            }
+        });
+    </script>
+</body>
+</html>

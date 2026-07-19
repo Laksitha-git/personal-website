@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!-- TODO: G-XXXXXXXXXX එක ඔයාගේ actual Google Analytics Measurement ID එකෙන් replace කරන්න (analytics.google.com) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-XXXXXXXXXX");
+    </script>
+
+    <script>
+        // Dark mode - saved preference (or OS preference) එක CSS load වෙන්නත් කලින් apply කරනවා, theme flash එකක් වළක්වන්න
+        (function () {
+            try {
+                var saved = localStorage.getItem('theme');
+                var wantsDark = saved ? saved === 'dark' : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                if (wantsDark) document.documentElement.setAttribute('data-theme', 'dark');
+            } catch (e) {}
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <title>Book a Call — LAKSITHA</title>
+    <meta name="description" content="Book a free call with Laksitha Chamodya, Web Designer.">
+    <meta name="theme-color" content="#1A2C51">
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Main content එකට යන්න</a>
+
+    <div id="preloader">
+        <div class="preloader-grid"></div>
+        <div class="preloader-panels"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="preloader-stage">
+            <div class="preloader-frame" id="preloaderFrame">
+                <span class="wf-bar wf-nav"></span>
+                <span class="wf-bar wf-img"></span>
+                <span class="wf-bar wf-line1"></span>
+                <span class="wf-bar wf-line2"></span>
+                <span class="wf-bar wf-btn"></span>
+            </div>
+            <div class="preloader-word">LAKSITHA</div>
+            <div class="preloader-status" id="preloaderStatus">Sketching layout</div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">LAKSITHA</a>
+            <div class="nav-links" id="navLinks">
+                <a href="about.html">About</a>
+                <a href="skills.html">Skills</a>
+                <a href="work.html">Work</a>
+                <a href="contact.html">Contact</a>
+                <a href="contact.html" class="nav-cta">Hire Me</a>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Dark mode toggle කරන්න">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Menu ඇරගන්න" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="page-header" id="main-content">
+        <span class="page-header-label">Schedule</span>
+        <h1>Book a Free Call</h1>
+        <p>Pick a date and time that works for you, and I'll confirm the call shortly.</p>
+
+        <div class="availability-badge availability-badge--hero" style="margin-top: 18px;">
+            <span class="availability-dot"></span>
+            Available for new projects
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="section-inner">
+            <span class="section-label reveal-fade">15-Minute Call</span>
+            <h2 class="section-title reveal">Find a slot that suits you</h2>
+            <p class="section-sub reveal">Weekdays only, 9:00 AM – 5:00 PM (Sri Lanka time). This sends a request — I'll confirm the exact time by email or WhatsApp within 24 hours.</p>
+
+            <div class="booking-layout">
+                <div class="reveal">
+                    <h3 class="booking-step-title">1. Select a date</h3>
+                    <div class="date-picker" id="datePicker"></div>
+
+                    <h3 class="booking-step-title">2. Select a time</h3>
+                    <div class="time-picker" id="timePicker">
+                        <p class="booking-hint" id="timeHint">Pick a date first</p>
+                    </div>
+                </div>
+
+                <div class="reveal" style="transition-delay: 0.15s;">
+                    <div class="booking-summary" id="bookingSummary">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <span id="bookingSummaryText">No date or time selected yet</span>
+                    </div>
+
+                    <!-- TODO: access_key එක contact.html එකේ දාපු Web3Forms key එකම, දෙකම එකම inbox එකට එනවා -->
+                    <form class="contact-form" id="bookingForm">
+                        <input type="hidden" name="access_key" value="be1771c7-4081-4820-a3d4-ce11d3c575c5">
+                        <input type="hidden" name="subject" value="New booking request from LAKSITHA's Profile">
+                        <input type="hidden" name="Requested Date" id="selectedDateInput">
+                        <input type="hidden" name="Requested Time" id="selectedTimeInput">
+                        <div style="display:none;"><input type="text" name="botcheck"></div>
+
+                        <div>
+                            <label for="bName">Name</label>
+                            <input type="text" id="bName" name="name" placeholder="Your name" required>
+                        </div>
+                        <div>
+                            <label for="bEmail">Email</label>
+                            <input type="email" id="bEmail" name="email" placeholder="you@example.com" required>
+                        </div>
+                        <div>
+                            <label for="bMessage">What's it about?</label>
+                            <textarea id="bMessage" name="message" rows="4" placeholder="Briefly describe your project..."></textarea>
+                        </div>
+                        <button type="submit" class="contact-submit-btn" id="bookingSubmitBtn" disabled>Request This Slot</button>
+                        <p class="contact-form-note" id="bookingFormStatus">Select a date and time above to continue.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <p>&copy; <span id="footerYear"></span> Laksitha Chamodya. Built with HTML &amp; CSS.</p>
+    </footer>
+
+    <script>
+        const revealEls = document.querySelectorAll('.reveal, .reveal-fade');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        revealEls.forEach(el => revealObserver.observe(el));
+    </script>
+
+    <script>
+        // Date/Time picker
+        const datePicker = document.getElementById('datePicker');
+        const timePicker = document.getElementById('timePicker');
+        const bookingSummary = document.getElementById('bookingSummaryText');
+        const selectedDateInput = document.getElementById('selectedDateInput');
+        const selectedTimeInput = document.getElementById('selectedTimeInput');
+        const bookingSubmitBtn = document.getElementById('bookingSubmitBtn');
+        const bookingFormStatus = document.getElementById('bookingFormStatus');
+
+        const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const timeSlots = ['09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '01:00 PM', '02:00 PM', '03:00 PM', '04:00 PM'];
+
+        let selectedDateLabel = null;
+        let selectedTimeLabel = null;
+
+        function updateSummaryAndButton() {
+            if (selectedDateLabel && selectedTimeLabel) {
+                bookingSummary.textContent = `${selectedDateLabel} at ${selectedTimeLabel}`;
+                selectedDateInput.value = selectedDateLabel;
+                selectedTimeInput.value = selectedTimeLabel;
+                bookingSubmitBtn.disabled = false;
+                bookingFormStatus.textContent = 'Fill in your details and send the request.';
+            } else {
+                bookingSummary.textContent = 'No date or time selected yet';
+                bookingSubmitBtn.disabled = true;
+                bookingFormStatus.textContent = 'Select a date and time above to continue.';
+            }
+        }
+
+        function toLocalIsoDate(d) {
+            const y = d.getFullYear();
+            const m = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${y}-${m}-${day}`;
+        }
+
+        // ==========================================================================
+        // UNAVAILABLE DATES - JSONBin.io cloud bin එකෙන් live load වෙනවා
+        // දවසක් අසනීප වුනොත් / busy වුනොත්, admin.html page එකෙන් toggle කරාම මෙතන automatically update වෙනවා
+        // redeploy කරන්නවත් ඕන නෑ
+        // ==========================================================================
+        const JSONBIN_ID = '6a5c26beda38895dfe70eece';
+        let blockedDates = [];
+
+        fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_ID}/latest`)
+            .then(res => res.json())
+            .then(data => { blockedDates = (data.record && data.record.blockedDates) || []; })
+            .catch(() => { blockedDates = []; }) // bin එක load නොවුනොත් හැම දවසක්ම available විදිහට තියෙනවා
+            .finally(() => buildDatePicker());
+
+        // ඉදිරි 21 දවස (weekdays විතරයි click කරන්න පුළුවන්, Calendly availability එකටම match වෙන්න)
+        function buildDatePicker() {
+            const today = new Date();
+            for (let i = 1; i <= 21; i++) {
+                const d = new Date(today);
+                d.setDate(today.getDate() + i);
+                const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+                const isoDate = toLocalIsoDate(d);
+                const isBlocked = blockedDates.includes(isoDate);
+                const isDisabled = isWeekend || isBlocked;
+
+                const pill = document.createElement('button');
+                pill.type = 'button';
+                pill.className = 'date-pill' + (isDisabled ? ' disabled' : '');
+                if (isBlocked) pill.title = 'Unavailable this day';
+                const fullLabel = `${dayNames[d.getDay()]}, ${monthNames[d.getMonth()]} ${d.getDate()}`;
+                pill.innerHTML = `<span class="date-pill-day">${dayNames[d.getDay()]}</span><span class="date-pill-num">${d.getDate()}</span>`;
+
+                if (!isDisabled) {
+                    pill.addEventListener('click', () => {
+                        document.querySelectorAll('.date-pill.selected').forEach(p => p.classList.remove('selected'));
+                        pill.classList.add('selected');
+                        selectedDateLabel = fullLabel;
+                        selectedTimeLabel = null;
+                        renderTimeSlots();
+                        updateSummaryAndButton();
+                    });
+                }
+
+                datePicker.appendChild(pill);
+            }
+        }
+
+        function renderTimeSlots() {
+            timePicker.innerHTML = '';
+            timeSlots.forEach(time => {
+                const pill = document.createElement('button');
+                pill.type = 'button';
+                pill.className = 'time-pill';
+                pill.textContent = time;
+                pill.addEventListener('click', () => {
+                    document.querySelectorAll('.time-pill.selected').forEach(p => p.classList.remove('selected'));
+                    pill.classList.add('selected');
+                    selectedTimeLabel = time;
+                    updateSummaryAndButton();
+                });
+                timePicker.appendChild(pill);
+            });
+        }
+    </script>
+
+    <script>
+        // Booking form - Web3Forms වලට submit වෙනවා (contact.html එකේම access key එක)
+        const bookingForm = document.getElementById('bookingForm');
+
+        bookingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            bookingSubmitBtn.disabled = true;
+            bookingSubmitBtn.textContent = 'Sending...';
+            bookingFormStatus.textContent = '';
+
+            try {
+                const formData = new FormData(bookingForm);
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json' },
+                    body: formData
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    bookingFormStatus.textContent = "Thanks! Your request has been sent - I'll confirm this slot soon.";
+                    bookingFormStatus.style.color = 'var(--text-primary)';
+                    bookingForm.reset();
+                    selectedDateLabel = null;
+                    selectedTimeLabel = null;
+                    document.querySelectorAll('.date-pill.selected, .time-pill.selected').forEach(p => p.classList.remove('selected'));
+                    timePicker.innerHTML = '<p class="booking-hint">Pick a date first</p>';
+                    bookingSummary.textContent = 'No date or time selected yet';
+                } else {
+                    bookingFormStatus.textContent = 'Something went wrong. Please try again or message on WhatsApp.';
+                    bookingFormStatus.style.color = '#b91c1c';
+                }
+            } catch (err) {
+                bookingFormStatus.textContent = 'Network error. Please try again or message on WhatsApp.';
+                bookingFormStatus.style.color = '#b91c1c';
+            } finally {
+                bookingSubmitBtn.disabled = false;
+                bookingSubmitBtn.textContent = 'Request This Slot';
+            }
+        });
+    </script>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', isOpen);
+        });
+    </script>
+
+    <script>
+        // Dark mode toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        function updateThemeIcon() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            themeToggle.setAttribute('aria-label', isDark ? 'Light mode වෙනස් කරන්න' : 'Dark mode වෙනස් කරන්න');
+        }
+        updateThemeIcon();
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            updateThemeIcon();
+        });
+    </script>
+
+    <script>
+        document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+        // Content protection - right-click context menu (save image / inspect shortcut) අඩුවෙන් convenient කරනවා
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Common keyboard shortcuts for saving/viewing-source/devtools - deterrent විතරයි, modern Chrome/Firefox ඇතුළේ F12/DevTools මේකෙන් සම්පූර්ණයෙන් නවත්තන්න බෑ
+        document.addEventListener('keydown', (e) => {
+            const key = e.key.toLowerCase();
+            const blockedCombo =
+                (e.ctrlKey && key === 's') ||
+                (e.ctrlKey && key === 'u') ||
+                (e.ctrlKey && e.shiftKey && (key === 'i' || key === 'j' || key === 'c')) ||
+                key === 'f12';
+            if (blockedCombo) e.preventDefault();
+        });
+
+        // Copy කරන්න try කළොත් clipboard එකට attribution message එකක් දානවා
+        document.addEventListener('copy', (e) => {
+            e.preventDefault();
+            e.clipboardData.setData('text/plain', "Content from LAKSITHA's Profile - please contact via the site's Contact page.");
+        });
+
+        document.onselectstart = () => false;
+    </script>
+
+    <script>
+        // Preloader - designer-flavored status messages, cycling while the wireframe builds
+        (function () {
+            const statusEl = document.getElementById("preloaderStatus");
+            const messages = ["Sketching layout", "Choosing palette", "Aligning pixels", "Polishing details"];
+            let i = 0;
+            const interval = setInterval(() => {
+                i = (i + 1) % messages.length;
+                statusEl.classList.add("swap");
+                setTimeout(() => {
+                    statusEl.textContent = messages[i];
+                    statusEl.classList.remove("swap");
+                }, 250);
+            }, 480);
+            window.__preloaderInterval = interval;
+        })();
+
+        // Preloader exit - venetian-blind panels lift away in a staggered wave
+        window.addEventListener("load", () => {
+            const preloader = document.getElementById("preloader");
+            setTimeout(() => {
+                preloader.classList.add("loaded");
+                clearInterval(window.__preloaderInterval);
+                setTimeout(() => preloader.remove(), 1200);
+            }, 1700);
+        });
+    </script>
+</body>
+</html>

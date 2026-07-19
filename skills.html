@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!-- TODO: G-XXXXXXXXXX එක ඔයාගේ actual Google Analytics Measurement ID එකෙන් replace කරන්න (analytics.google.com) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-XXXXXXXXXX");
+    </script>
+
+    <script>
+        // Dark mode - saved preference (or OS preference) එක CSS load වෙන්නත් කලින් apply කරනවා, theme flash එකක් වළක්වන්න
+        (function () {
+            try {
+                var saved = localStorage.getItem('theme');
+                var wantsDark = saved ? saved === 'dark' : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                if (wantsDark) document.documentElement.setAttribute('data-theme', 'dark');
+            } catch (e) {}
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <title>Skills — LAKSITHA</title>
+    <meta name="description" content="Skills and tools - Laksitha Chamodya, Web Designer.">
+    <meta name="theme-color" content="#1A2C51">
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Main content එකට යන්න</a>
+
+    <div id="preloader">
+        <div class="preloader-grid"></div>
+        <div class="preloader-panels"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="preloader-stage">
+            <div class="preloader-frame" id="preloaderFrame">
+                <span class="wf-bar wf-nav"></span>
+                <span class="wf-bar wf-img"></span>
+                <span class="wf-bar wf-line1"></span>
+                <span class="wf-bar wf-line2"></span>
+                <span class="wf-bar wf-btn"></span>
+            </div>
+            <div class="preloader-word">LAKSITHA</div>
+            <div class="preloader-status" id="preloaderStatus">Sketching layout</div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">LAKSITHA</a>
+            <div class="nav-links" id="navLinks">
+                <a href="about.html">About</a>
+                <a href="skills.html" class="active">Skills</a>
+                <a href="work.html">Work</a>
+                <a href="contact.html">Contact</a>
+                <a href="contact.html" class="nav-cta">Hire Me</a>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Dark mode toggle කරන්න">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Menu ඇරගන්න" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="page-header" id="main-content">
+        <span class="page-header-label">Skills</span>
+        <h1>Tools I design with</h1>
+        <p>A mix of design tools, UI/UX thinking, and just enough code to build what I design.</p>
+    </header>
+
+    <!--  TODO: percentages ටික ඔයාගේ actual comfort level එකට ගැලපෙන්න වෙනස් කරන්න -->
+    <section class="section">
+        <div class="section-inner">
+
+            <div class="skills-category">
+                <h3 class="skills-category-title">Design Tools</h3>
+
+                <div class="skill-badge-bar reveal" style="transition-delay: 0.05s;">
+                    <i class="fa-brands fa-figma"></i>
+                    <div class="skill-badge-bar-info">
+                        <div class="skill-badge-bar-top"><span>Figma</span><span>90%</span></div>
+                        <div class="skill-progress-track"><div class="skill-progress-fill" data-fill="90"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-badge-bar reveal" style="transition-delay: 0.1s;">
+                    <i class="fa-solid fa-image"></i>
+                    <div class="skill-badge-bar-info">
+                        <div class="skill-badge-bar-top"><span>Photoshop</span><span>80%</span></div>
+                        <div class="skill-progress-track"><div class="skill-progress-fill" data-fill="80"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-badge-bar reveal" style="transition-delay: 0.15s;">
+                    <i class="fa-solid fa-bezier-curve"></i>
+                    <div class="skill-badge-bar-info">
+                        <div class="skill-badge-bar-top"><span>Illustrator</span><span>70%</span></div>
+                        <div class="skill-progress-track"><div class="skill-progress-fill" data-fill="70"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h3 class="skills-category-title">Design Skills</h3>
+
+                <div class="skill-badge-bar reveal" style="transition-delay: 0.05s;">
+                    <i class="fa-solid fa-pen-nib"></i>
+                    <div class="skill-badge-bar-info">
+                        <div class="skill-badge-bar-top"><span>UI / UX Design</span><span>85%</span></div>
+                        <div class="skill-progress-track"><div class="skill-progress-fill" data-fill="85"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-badge-bar reveal" style="transition-delay: 0.1s;">
+                    <i class="fa-solid fa-swatchbook"></i>
+                    <div class="skill-badge-bar-info">
+                        <div class="skill-badge-bar-top"><span>Branding</span><span>75%</span></div>
+                        <div class="skill-progress-track"><div class="skill-progress-fill" data-fill="75"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-badge-bar reveal" style="transition-delay: 0.15s;">
+                    <i class="fa-solid fa-text-height"></i>
+                    <div class="skill-badge-bar-info">
+                        <div class="skill-badge-bar-top"><span>Typography</span><span>80%</span></div>
+                        <div class="skill-progress-track"><div class="skill-progress-fill" data-fill="80"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-category">
+                <h3 class="skills-category-title">Front-End Code</h3>
+
+                <div class="skill-badge-bar reveal" style="transition-delay: 0.05s;">
+                    <i class="fa-brands fa-html5"></i>
+                    <div class="skill-badge-bar-info">
+                        <div class="skill-badge-bar-top"><span>HTML</span><span>85%</span></div>
+                        <div class="skill-progress-track"><div class="skill-progress-fill" data-fill="85"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-badge-bar reveal" style="transition-delay: 0.1s;">
+                    <i class="fa-brands fa-css3-alt"></i>
+                    <div class="skill-badge-bar-info">
+                        <div class="skill-badge-bar-top"><span>CSS</span><span>80%</span></div>
+                        <div class="skill-progress-track"><div class="skill-progress-fill" data-fill="80"></div></div>
+                    </div>
+                </div>
+
+                <div class="skill-badge-bar reveal" style="transition-delay: 0.15s;">
+                    <i class="fa-brands fa-js"></i>
+                    <div class="skill-badge-bar-info">
+                        <div class="skill-badge-bar-top"><span>JavaScript</span><span>55%</span></div>
+                        <div class="skill-progress-track"><div class="skill-progress-fill" data-fill="55"></div></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <div class="section-inner">
+            <span class="section-label reveal-fade">Always Learning</span>
+            <h2 class="section-title reveal">Currently exploring</h2>
+            <p class="section-sub reveal">Tools and skills I'm picking up right now.</p>
+
+            <!-- TODO: ඔයා දැනට ඉගෙන ගන්න dawan things ටික දාන්න -->
+            <div class="skills-grid">
+                <div class="skill-badge reveal" style="transition-delay: 0.05s;"><i class="fa-brands fa-figma"></i><span>Framer</span></div>
+                <div class="skill-badge reveal" style="transition-delay: 0.1s;"><i class="fa-solid fa-video"></i><span>Motion Design</span></div>
+                <div class="skill-badge reveal" style="transition-delay: 0.15s;"><i class="fa-brands fa-square-js"></i><span>JavaScript</span></div>
+                <div class="skill-badge reveal" style="transition-delay: 0.2s;"><i class="fa-solid fa-object-group"></i><span>Webflow</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-inner">
+            <span class="section-label reveal-fade">Credentials</span>
+            <h2 class="section-title reveal">Certifications</h2>
+
+            <!-- TODO: ඔයාගේ actual certifications ටික දාන්න -->
+            <div class="cert-list">
+                <div class="cert-item reveal" style="transition-delay: 0.05s;">
+                    <i class="fa-solid fa-certificate"></i>
+                    <div>
+                        <p class="cert-title">UI/UX Design Fundamentals</p>
+                        <p class="cert-meta">Placeholder Institute — 2023</p>
+                    </div>
+                </div>
+                <div class="cert-item reveal" style="transition-delay: 0.1s;">
+                    <i class="fa-solid fa-certificate"></i>
+                    <div>
+                        <p class="cert-title">Diploma in Software Engineering / Web Design</p>
+                        <p class="cert-meta">Placeholder Institute — 2023</p>
+                    </div>
+                </div>
+                <div class="cert-item reveal" style="transition-delay: 0.15s;">
+                    <i class="fa-solid fa-certificate"></i>
+                    <div>
+                        <p class="cert-title">Figma Essential Training</p>
+                        <p class="cert-meta">Placeholder Platform — 2022</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <p>&copy; <span id="footerYear"></span> Laksitha Chamodya. Built with HTML &amp; CSS.</p>
+    </footer>
+
+    <script>
+        const revealEls = document.querySelectorAll('.reveal, .reveal-fade');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // progress bar එකක් තියෙනවා නම් fill කරන්න
+                    const fill = entry.target.querySelector('.skill-progress-fill');
+                    if (fill) fill.style.width = fill.dataset.fill + '%';
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        revealEls.forEach(el => revealObserver.observe(el));
+    </script>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', isOpen);
+        });
+    </script>
+
+    <script>
+        // Dark mode toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        function updateThemeIcon() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            themeToggle.setAttribute('aria-label', isDark ? 'Light mode වෙනස් කරන්න' : 'Dark mode වෙනස් කරන්න');
+        }
+        updateThemeIcon();
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            updateThemeIcon();
+        });
+    </script>
+
+    <script>
+        document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+        // Content protection - right-click context menu (save image / inspect shortcut) අඩුවෙන් convenient කරනවා
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Common keyboard shortcuts for saving/viewing-source/devtools - deterrent විතරයි, modern Chrome/Firefox ඇතුළේ F12/DevTools මේකෙන් සම්පූර්ණයෙන් නවත්තන්න බෑ
+        document.addEventListener('keydown', (e) => {
+            const key = e.key.toLowerCase();
+            const blockedCombo =
+                (e.ctrlKey && key === 's') ||
+                (e.ctrlKey && key === 'u') ||
+                (e.ctrlKey && e.shiftKey && (key === 'i' || key === 'j' || key === 'c')) ||
+                key === 'f12';
+            if (blockedCombo) e.preventDefault();
+        });
+
+        // Copy කරන්න try කළොත් clipboard එකට attribution message එකක් දානවා
+        document.addEventListener('copy', (e) => {
+            e.preventDefault();
+            e.clipboardData.setData('text/plain', "Content from LAKSITHA's Profile - please contact via the site's Contact page.");
+        });
+
+        document.onselectstart = () => false;
+    </script>
+
+    <script>
+        // Preloader - designer-flavored status messages, cycling while the wireframe builds
+        (function () {
+            const statusEl = document.getElementById("preloaderStatus");
+            const messages = ["Sketching layout", "Choosing palette", "Aligning pixels", "Polishing details"];
+            let i = 0;
+            const interval = setInterval(() => {
+                i = (i + 1) % messages.length;
+                statusEl.classList.add("swap");
+                setTimeout(() => {
+                    statusEl.textContent = messages[i];
+                    statusEl.classList.remove("swap");
+                }, 250);
+            }, 480);
+            window.__preloaderInterval = interval;
+        })();
+
+        // Preloader exit - venetian-blind panels lift away in a staggered wave
+        window.addEventListener("load", () => {
+            const preloader = document.getElementById("preloader");
+            setTimeout(() => {
+                preloader.classList.add("loaded");
+                clearInterval(window.__preloaderInterval);
+                setTimeout(() => preloader.remove(), 1200);
+            }, 1700);
+        });
+    </script>
+</body>
+</html>
