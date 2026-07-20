@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('theme');
+                var wantsDark = saved ? saved === 'dark' : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                if (wantsDark) document.documentElement.setAttribute('data-theme', 'dark');
+            } catch (e) {}
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <title>Analytics — LAKSITHA</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#1A2C51">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">LAKSITHA</a>
+            <div class="nav-links" id="navLinks">
+                <a href="about.html">About</a>
+                <a href="skills.html">Skills</a>
+                <a href="work.html">Work</a>
+                <a href="contact.html">Contact</a>
+                <a href="contact.html" class="nav-cta">Hire Me</a>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Dark mode toggle කරන්න">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu ඇරගන්න" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="page-header" id="main-content">
+        <span class="page-header-label">Private</span>
+        <h1>Analytics</h1>
+        <p>Simple, self-built page-view tracking - no third-party service involved.</p>
+    </header>
+
+    <section class="section">
+        <div class="section-inner" style="max-width: 900px;">
+
+            <div class="admin-gate" id="adminGate">
+                <h3 class="booking-step-title" style="text-align:center;">Enter password</h3>
+                <input type="password" id="adminPassword" placeholder="Password">
+                <button type="button" class="contact-submit-btn" id="adminUnlockBtn" style="width:100%; justify-content:center;">Unlock</button>
+                <p class="contact-form-note" id="adminGateStatus"></p>
+            </div>
+
+            <div id="analyticsPanel" style="display:none;">
+                <div class="booking-summary" id="statusBanner">
+                    <i class="fa-solid fa-circle-notch fa-spin"></i>
+                    <span>Loading analytics...</span>
+                </div>
+
+                <span class="section-label reveal-fade">Overview</span>
+                <h2 class="section-title reveal">Page views</h2>
+
+                <div class="stats-grid" id="pageViewsGrid" style="margin-bottom: 40px;"></div>
+
+                <span class="section-label reveal-fade">Activity</span>
+                <h2 class="section-title reveal">Recent visits</h2>
+                <p class="section-sub reveal">Most recent 200 page loads, newest first.</p>
+
+                <div class="cert-list" id="recentVisitsList"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <p>&copy; <span id="footerYear"></span> Laksitha Chamodya. Private admin page.</p>
+    </footer>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', isOpen);
+        });
+    </script>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        function updateThemeIcon() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+        }
+        updateThemeIcon();
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('theme', 'light'); }
+            else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('theme', 'dark'); }
+            updateThemeIcon();
+        });
+        document.getElementById('footerYear').textContent = new Date().getFullYear();
+    </script>
+
+    <script>
+        // Password gate - server-side එකේදීම (analytics function එකේ) validate වෙනවා,
+        // client-side code එකේ password එකක් hardcode වෙලා නෑ.
+        const adminGate = document.getElementById('adminGate');
+        const analyticsPanel = document.getElementById('analyticsPanel');
+        const adminPasswordInput = document.getElementById('adminPassword');
+        const adminGateStatus = document.getElementById('adminGateStatus');
+        const statusBanner = document.getElementById('statusBanner');
+        const pageViewsGrid = document.getElementById('pageViewsGrid');
+        const recentVisitsList = document.getElementById('recentVisitsList');
+
+        document.getElementById('adminUnlockBtn').addEventListener('click', unlock);
+        adminPasswordInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') unlock(); });
+
+        async function unlock() {
+            const password = adminPasswordInput.value;
+            if (!password) {
+                adminGateStatus.textContent = 'Please enter a password.';
+                adminGateStatus.style.color = '#b91c1c';
+                return;
+            }
+
+            try {
+                const res = await fetch('/api/analytics?password=' + encodeURIComponent(password));
+                if (res.status === 401) {
+                    adminGateStatus.textContent = 'Incorrect password.';
+                    adminGateStatus.style.color = '#b91c1c';
+                    return;
+                }
+                const data = await res.json();
+                adminGate.style.display = 'none';
+                analyticsPanel.style.display = 'block';
+                renderAnalytics(data);
+            } catch (err) {
+                adminGateStatus.textContent = 'Network error. Please try again.';
+                adminGateStatus.style.color = '#b91c1c';
+            }
+        }
+
+        function renderAnalytics(data) {
+            const pageViews = data.pageViews || {};
+            const recentVisits = data.recentVisits || [];
+
+            const totalViews = Object.values(pageViews).reduce((a, b) => a + b, 0);
+            statusBanner.innerHTML = `<i class="fa-solid fa-chart-simple"></i><span>${totalViews} total page views recorded.</span>`;
+
+            // Page views grid
+            pageViewsGrid.innerHTML = '';
+            const sortedPages = Object.entries(pageViews).sort((a, b) => b[1] - a[1]);
+            if (sortedPages.length === 0) {
+                pageViewsGrid.innerHTML = '<p class="booking-hint">No page views recorded yet.</p>';
+            }
+            sortedPages.forEach(([page, count]) => {
+                const item = document.createElement('div');
+                item.className = 'stat-item';
+                item.innerHTML = `<span class="stat-number">${count}</span><span class="stat-label">${page}</span>`;
+                pageViewsGrid.appendChild(item);
+            });
+
+            // Recent visits list
+            recentVisitsList.innerHTML = '';
+            if (recentVisits.length === 0) {
+                recentVisitsList.innerHTML = '<p class="booking-hint">No visits recorded yet.</p>';
+            }
+            recentVisits.forEach(visit => {
+                const row = document.createElement('div');
+                row.className = 'cert-item';
+                const time = new Date(visit.time);
+                const timeLabel = time.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+                row.innerHTML = `
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <div>
+                        <p class="cert-title">${visit.page}</p>
+                        <p class="cert-meta">${timeLabel}</p>
+                    </div>
+                `;
+                recentVisitsList.appendChild(row);
+            });
+        }
+    </script>
+</body>
+</html>
