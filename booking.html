@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8">
 
-    <!-- TODO: G-XXXXXXXXXX එක ඔයාගේ actual Google Analytics Measurement ID එකෙන් replace කරන්න (analytics.google.com) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag("js", new Date());
-        gtag("config", "G-XXXXXXXXXX");
+        // Self-built analytics - lightweight page-view tracking (Netlify Function + Blobs, third-party නෑ)
+        fetch("/api/analytics", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ page: location.pathname })
+        }).catch(() => {});
     </script>
 
     <script>
