@@ -11,15 +11,23 @@
 /* dot-grid canvas background, panned slowly - like a design tool artboard */
 .preloader-grid {
 	position: absolute;
-	inset: -20px;
+	inset: 0;
+	overflow: hidden;
 	background-color: #0f1830;
+}
+
+.preloader-grid::before {
+	content: "";
+	position: absolute;
+	inset: -30px;
 	background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px);
 	background-size: 26px 26px;
 	animation: preloaderGridPan 16s linear infinite;
+	will-change: transform;
 }
 
 @keyframes preloaderGridPan {
-	to { background-position: 260px 130px; }
+	to { transform: translate(260px, 130px); }
 }
 
 /* centered stage - wireframe build + wordmark + status */
@@ -83,7 +91,7 @@
 	color: transparent;
 	opacity: 0;
 	transform: translateY(10px);
-	animation: preloaderWordIn 0.6s ease forwards, preloaderShimmer 2.2s linear infinite;
+	animation: preloaderWordIn 0.6s ease forwards, preloaderShimmer 1.4s linear 1;
 	animation-delay: 1.05s, 1.6s;
 }
 
@@ -1788,18 +1796,28 @@ body
 }
 
 .availability-dot {
+	position: relative;
 	width: 8px;
 	height: 8px;
 	border-radius: 50%;
 	background: #22c55e;
 	flex-shrink: 0;
+}
+
+.availability-dot::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: 50%;
+	background: #22c55e;
 	animation: availabilityPulse 2s infinite;
+	will-change: transform, opacity;
 }
 
 @keyframes availabilityPulse {
-	0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55); }
-	70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
-	100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+	0% { transform: scale(1); opacity: 0.55; }
+	70% { transform: scale(3.2); opacity: 0; }
+	100% { transform: scale(3.2); opacity: 0; }
 }
 
 /* ========================================================
