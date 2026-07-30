@@ -38,6 +38,9 @@
 </head>
 <body>
 
+    <div class="custom-cursor-dot" id="cursorDot"></div>
+    <div class="custom-cursor-ring" id="cursorRing"></div>
+
     <a href="#main-content" class="skip-link">Main content එකට යන්න</a>
 
     <div id="preloader">
@@ -88,6 +91,10 @@
             <span class="availability-dot"></span>
             Available for new projects
         </div>
+
+        <p style="margin-top: 18px; font-size: 14px;">
+            Not sure about budget yet? <a href="quote.html" style="color: #fff; text-decoration: underline;">Try the instant quote calculator <i class="fa-solid fa-arrow-right"></i></a>
+        </p>
     </header>
 
     <section class="section">
@@ -120,7 +127,7 @@
                     <h3 class="contact-side-title">Other ways to reach me</h3>
 
                     <!--  TODO: actual email/phone එකතු කරන්න -->
-                    <div class="contact-info-row"><i class="fa-solid fa-envelope"></i> hello@example.com</div>
+                    <div class="contact-info-row"><i class="fa-solid fa-envelope"></i> <a href="mailto:laksithachamodya116@gmail.com" style="color: inherit; text-decoration: none;">laksithachamodya116@gmail.com</a></div>
                     <div class="contact-info-row"><i class="fa-brands fa-whatsapp"></i> Available on WhatsApp</div>
                     <div class="contact-info-row"><i class="fa-solid fa-location-dot"></i> Sri Lanka</div>
 
@@ -320,6 +327,61 @@
                 setTimeout(() => preloader.remove(), 1200);
             }, 1700);
         });
+    </script>
+    <script>
+        // Custom cursor - fine-pointer devices (mouse/trackpad) විතරයි, reduced-motion preference එකක් නම් respect කරනවා
+        (function () {
+            const isFinePointer = window.matchMedia("(pointer: fine)").matches;
+            const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            if (!isFinePointer || prefersReducedMotion) return;
+
+            document.body.classList.add("custom-cursor-active");
+            const dot = document.getElementById("cursorDot");
+            const ring = document.getElementById("cursorRing");
+
+            let ringX = 0, ringY = 0, targetX = 0, targetY = 0;
+            let started = false;
+
+            window.addEventListener("mousemove", (e) => {
+                targetX = e.clientX;
+                targetY = e.clientY;
+                dot.style.left = targetX + "px";
+                dot.style.top = targetY + "px";
+                if (!started) {
+                    started = true;
+                    ringX = targetX;
+                    ringY = targetY;
+                    dot.classList.add("visible");
+                    ring.classList.add("visible");
+                }
+            });
+
+            function animateRing() {
+                ringX += (targetX - ringX) * 0.18;
+                ringY += (targetY - ringY) * 0.18;
+                ring.style.left = ringX + "px";
+                ring.style.top = ringY + "px";
+                requestAnimationFrame(animateRing);
+            }
+            requestAnimationFrame(animateRing);
+
+            const hoverTargets = "a, button, input, textarea, label, [role="button"], .date-pill, .time-pill, .option-pill";
+            document.addEventListener("mouseover", (e) => {
+                if (e.target.closest(hoverTargets)) ring.classList.add("hover");
+            });
+            document.addEventListener("mouseout", (e) => {
+                if (e.target.closest(hoverTargets)) ring.classList.remove("hover");
+            });
+
+            document.addEventListener("mouseleave", () => {
+                dot.classList.remove("visible");
+                ring.classList.remove("visible");
+            });
+            document.addEventListener("mouseenter", () => {
+                dot.classList.add("visible");
+                ring.classList.add("visible");
+            });
+        })();
     </script>
 </body>
 </html>

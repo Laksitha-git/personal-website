@@ -1716,7 +1716,8 @@ body
 		display: block;
 	}
 
-	.contact-layout, .booking-layout { grid-template-columns: 1fr; gap: 34px; }
+	.contact-layout, .booking-layout, .quote-layout { grid-template-columns: 1fr; gap: 34px; }
+	.quote-summary-card { position: static; }
 	.work-grid, .testimonial-grid { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
 }
 
@@ -2068,6 +2069,305 @@ body
 	vertical-align: middle;
 }
 
+/* ========================================================
+   QUOTE CALCULATOR
+   ======================================================== */
+.quote-layout {
+	display: grid;
+	grid-template-columns: 1.3fr 1fr;
+	gap: 50px;
+	align-items: start;
+	text-align: left;
+}
+
+.quote-section {
+	margin-bottom: 34px;
+}
+
+.quote-section-title {
+	font-family: "Rubik", sans-serif;
+	font-weight: 700;
+	font-size: 16px;
+	color: var(--text-primary);
+	margin: 0 0 6px;
+}
+
+.quote-section-hint {
+	font-family: "Inter", sans-serif;
+	font-size: 13px;
+	color: var(--text-primary);
+	margin: 0 0 16px;
+	font-weight: 400;
+}
+
+.option-pills {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.option-pill {
+	display: flex;
+	flex-direction: column;
+	padding: 12px 20px;
+	border-radius: 14px;
+	background: var(--card-bg);
+	border: 1px solid var(--card-border);
+	cursor: pointer;
+	font-family: "Inter", sans-serif;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.option-pill:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 16px var(--card-shadow);
+}
+
+.option-pill-label {
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--text-primary);
+}
+
+.option-pill-sub {
+	font-size: 11px;
+	font-weight: 500;
+	color: var(--text-primary);
+}
+
+.option-pill.selected {
+	background: linear-gradient(135deg, #6366f1, #06b6d4);
+	border-color: transparent;
+}
+
+.option-pill.selected .option-pill-label,
+.option-pill.selected .option-pill-sub {
+	color: #ffffff;
+}
+
+.feature-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	gap: 12px;
+}
+
+.feature-checkbox {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 14px 18px;
+	border-radius: 14px;
+	background: var(--card-bg);
+	border: 1px solid var(--card-border);
+	cursor: pointer;
+	transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.feature-checkbox:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 16px var(--card-shadow);
+}
+
+.feature-checkbox.selected {
+	background: linear-gradient(135deg, #6366f1, #06b6d4);
+	border-color: transparent;
+}
+
+.feature-checkbox.selected i,
+.feature-checkbox.selected .feature-name,
+.feature-checkbox.selected .feature-price {
+	color: #ffffff;
+}
+
+.feature-checkbox input[type="checkbox"] {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+	margin: 0;
+}
+
+.feature-checkbox:has(input:focus-visible) {
+	outline: 3px solid #06b6d4;
+	outline-offset: 3px;
+}
+
+.feature-checkbox i {
+	font-size: 15px;
+	color: #6366f1;
+	width: 18px;
+	text-align: center;
+	flex-shrink: 0;
+}
+
+.feature-checkbox .feature-name {
+	flex: 1;
+	font-family: "Inter", sans-serif;
+	font-size: 14px;
+	color: var(--text-primary);
+}
+
+.feature-checkbox .feature-price {
+	font-family: "Inter", sans-serif;
+	font-size: 13px;
+	font-weight: 700;
+	color: #6366f1;
+}
+
+.pages-stepper {
+	display: flex;
+	align-items: center;
+	gap: 18px;
+}
+
+.pages-stepper-btn {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: var(--card-bg);
+	border: 1px solid var(--card-border);
+	color: var(--text-primary);
+	font-size: 18px;
+	font-weight: 700;
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+
+.pages-stepper-btn:hover {
+	transform: translateY(-2px);
+}
+
+.pages-stepper-count {
+	font-family: "Rubik", sans-serif;
+	font-weight: 800;
+	font-size: 24px;
+	color: var(--text-primary);
+	min-width: 70px;
+	text-align: center;
+}
+
+.quote-summary-card {
+	position: sticky;
+	top: 110px;
+	background: var(--card-bg-strong);
+	border: 1px solid var(--card-border);
+	border-radius: 20px;
+	padding: 28px;
+}
+
+.quote-summary-title {
+	font-family: "Rubik", sans-serif;
+	font-weight: 700;
+	font-size: 16px;
+	color: var(--text-primary);
+	margin: 0 0 18px;
+}
+
+.quote-line {
+	display: flex;
+	justify-content: space-between;
+	gap: 12px;
+	font-family: "Inter", sans-serif;
+	font-size: 13px;
+	color: var(--text-primary);
+	padding: 9px 0;
+	border-bottom: 1px solid var(--divider);
+}
+
+.quote-line span:last-child {
+	font-weight: 600;
+	white-space: nowrap;
+}
+
+.quote-total {
+	margin-top: 18px;
+	padding-top: 18px;
+	border-top: 2px solid var(--divider);
+	text-align: center;
+}
+
+.quote-total-label {
+	font-family: "Inter", sans-serif;
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: var(--text-primary);
+	margin-bottom: 6px;
+}
+
+.quote-total-value {
+	font-family: "Rubik", sans-serif;
+	font-weight: 800;
+	font-size: 32px;
+	background: linear-gradient(135deg, #6366f1, #06b6d4);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+.quote-request-form {
+	margin-top: 26px;
+	padding-top: 22px;
+	border-top: 1px solid var(--divider);
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+/* ========================================================
+   CUSTOM CURSOR (mouse/trackpad devices only, respects prefers-reduced-motion)
+   ======================================================== */
+@media (pointer: fine) {
+	body.custom-cursor-active,
+	body.custom-cursor-active a,
+	body.custom-cursor-active button,
+	body.custom-cursor-active input,
+	body.custom-cursor-active textarea,
+	body.custom-cursor-active label,
+	body.custom-cursor-active [role="button"] {
+		cursor: none;
+	}
+}
+
+.custom-cursor-dot,
+.custom-cursor-ring {
+	position: fixed;
+	top: 0;
+	left: 0;
+	border-radius: 50%;
+	pointer-events: none;
+	z-index: 9998;
+	transform: translate(-50%, -50%);
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.custom-cursor-dot {
+	width: 8px;
+	height: 8px;
+	background: linear-gradient(135deg, #6366f1, #06b6d4);
+}
+
+.custom-cursor-ring {
+	width: 32px;
+	height: 32px;
+	border: 1.5px solid rgba(99, 102, 241, 0.5);
+	transition: opacity 0.3s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+}
+
+.custom-cursor-ring.hover {
+	width: 50px;
+	height: 50px;
+	border-color: #06b6d4;
+	background: rgba(6, 182, 212, 0.08);
+}
+
+.custom-cursor-dot.visible,
+.custom-cursor-ring.visible {
+	opacity: 1;
+}
 /* ========================================================
    PRINT PROTECTION (Ctrl+P / "Save as PDF" reliably shows this instead of real content)
    ======================================================== */

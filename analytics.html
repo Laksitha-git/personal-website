@@ -25,6 +25,9 @@
 </head>
 <body>
 
+    <div class="custom-cursor-dot" id="cursorDot"></div>
+    <div class="custom-cursor-ring" id="cursorRing"></div>
+
     <nav class="navbar">
         <div class="nav-inner">
             <a href="index.html" class="nav-logo">LAKSITHA</a>
@@ -194,6 +197,61 @@
                 recentVisitsList.appendChild(row);
             });
         }
+    </script>
+    <script>
+        // Custom cursor - fine-pointer devices (mouse/trackpad) විතරයි, reduced-motion preference එකක් නම් respect කරනවා
+        (function () {
+            const isFinePointer = window.matchMedia("(pointer: fine)").matches;
+            const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            if (!isFinePointer || prefersReducedMotion) return;
+
+            document.body.classList.add("custom-cursor-active");
+            const dot = document.getElementById("cursorDot");
+            const ring = document.getElementById("cursorRing");
+
+            let ringX = 0, ringY = 0, targetX = 0, targetY = 0;
+            let started = false;
+
+            window.addEventListener("mousemove", (e) => {
+                targetX = e.clientX;
+                targetY = e.clientY;
+                dot.style.left = targetX + "px";
+                dot.style.top = targetY + "px";
+                if (!started) {
+                    started = true;
+                    ringX = targetX;
+                    ringY = targetY;
+                    dot.classList.add("visible");
+                    ring.classList.add("visible");
+                }
+            });
+
+            function animateRing() {
+                ringX += (targetX - ringX) * 0.18;
+                ringY += (targetY - ringY) * 0.18;
+                ring.style.left = ringX + "px";
+                ring.style.top = ringY + "px";
+                requestAnimationFrame(animateRing);
+            }
+            requestAnimationFrame(animateRing);
+
+            const hoverTargets = "a, button, input, textarea, label, [role="button"], .date-pill, .time-pill, .option-pill";
+            document.addEventListener("mouseover", (e) => {
+                if (e.target.closest(hoverTargets)) ring.classList.add("hover");
+            });
+            document.addEventListener("mouseout", (e) => {
+                if (e.target.closest(hoverTargets)) ring.classList.remove("hover");
+            });
+
+            document.addEventListener("mouseleave", () => {
+                dot.classList.remove("visible");
+                ring.classList.remove("visible");
+            });
+            document.addEventListener("mouseenter", () => {
+                dot.classList.add("visible");
+                ring.classList.add("visible");
+            });
+        })();
     </script>
 </body>
 </html>
